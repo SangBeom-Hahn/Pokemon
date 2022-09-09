@@ -3,8 +3,8 @@
 # include<string.h>
 
 typedef struct{
-    char name[20]; //íŒŒì´ë¦¬
-    char property[10]; //ë¶ˆ
+    char name[20]; //ÆÄÀÌ¸®
+    char property[10]; //ºÒ
     int power; //12
     int hp; //500
 }PokemonList;
@@ -13,12 +13,12 @@ void main(void){
     FILE *fp;
     fp = fopen("pokemon_list.txt", "r");
 
-    PokemonList PL[13]; //íŒŒì¼ì˜ ê¸¸ì´ë¥¼ ì•Œë©´ ì¢‹ì„ í…ë°
+    PokemonList PL[13]; //ÆÄÀÏÀÇ ±æÀÌ¸¦ ¾Ë¸é ÁÁÀ» ÅÙµ¥
     int pokemonListSize = sizeof(PL) / sizeof(PL[0]);
     int i=0;
 
     if(fp == NULL){
-        printf("íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.");
+        printf("ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.");
         exit(1);
     }
 
@@ -34,6 +34,8 @@ void main(void){
     for(int i=0; i<pokemonListSize; i++){
         printf("%s %s %d %d\n", PL[i].name, PL[i].property, PL[i].power, PL[i].hp);
     }
+
+    printf("================================================\n\t\tÆ÷ÄÏ¸ó½ºÅÍ\n\tpress enter key to start");
 
     fclose(fp);
 }
