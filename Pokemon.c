@@ -3,24 +3,9 @@
 # include<string.h>
 # include<conio.h> // getch 함수 명시적으로 선언
 # include<time.h>
-
-typedef struct{
-    char name[20]; //파이리
-    char property[10]; //불
-    int power; //12
-    int hp; //500
-}PokemonList;
-
-typedef struct 
-{
-    /* data */
-    char name[20]; //파이리
-    char nickName[100]; //꽁꽁이
-    char property[10]; //불
-    int power; //12
-    int hp; //500
-}MyPokemon;
-
+# include<unistd.h> //sleep 함수 명시적으로 선언
+# include "Pokemon.h"
+# include "travel.h"
 
 void main(void){
     FILE *fp;
@@ -95,8 +80,18 @@ void main(void){
         printf("이름은 : %s\n속성은 : %s\n별명은 : %s\n체력은 : %d\n공격력은 : %d\n", myPokemon.name, myPokemon.property, myPokemon.nickName, myPokemon.hp, myPokemon.power);
     }   
 
-        printf("================================================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장요부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기\n>>");
+        printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)\n");
         scanf("%d", &travelQA);
+
+        if(travelQA == 1){
+            travel();
+        }
+        else if(travelQA == 2){
+            
+        }
+        else{
+            
+        }
 
     fclose(fp);
 }
