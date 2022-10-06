@@ -146,7 +146,7 @@ void travel(void){
                 
             }
             else if(sixRepeat == 2){
-
+                //
             }
             else if(sixRepeat == 3){
 
