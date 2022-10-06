@@ -6,6 +6,8 @@
 # include<unistd.h> //sleep 함수 명시적으로 선언
 # include "Pokemon.h"
 
+/*이 플젝에서 제일 포인트는 현재 싸우는 포켓몬 변수를 만들고 리스트에서 하나씩 꺼내서 대입하는 것!!!*/
+
 PokemonList PL[13]; //파일의 길이를 알면 좋을 텐데
 MyPokemon myPokemon[6]; //같은 이유로 밖으로 뺌
 
@@ -13,11 +15,11 @@ MyPokemon myPokemon[6]; //같은 이유로 밖으로 뺌
 double fight(char fightingPokemon[], char enemyPokemon[]){
     if(strcmp(fightingPokemon, "불") == 0) {
         if(strcmp(enemyPokemon, "풀") == 0){
-            printf("효과가 굉장했다.");
+            printf("효과가 굉장했다(푸슝~)  ");
             return 1.5;
         }
         else if(strcmp(enemyPokemon, "물") == 0){
-            printf("효과가 별로인 듯 하다.");
+            printf("효과가 별로인 듯 하다.(후ㅜㅜㅜ)  ");
             return 0.5;
         }
         else   
@@ -29,11 +31,11 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
     }
     else if( strcmp(fightingPokemon, "물") == 0){
         if(strcmp(enemyPokemon, "불") == 0){
-            printf("효과가 굉장했다.");
+            printf("효과가 굉장했다(푸슝~).  ");
             return 1.5;
         } 
         else if(strcmp(enemyPokemon, "풀") == 0){
-            printf("효과가 별로인 듯 하다.");
+            printf("효과가 별로인 듯 하다.(후ㅜㅜㅜ)  ");
             return 0.5;
         }
         else   
@@ -44,11 +46,11 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
     }
     else{
         if(strcmp(enemyPokemon, "물") == 0){
-            printf("효과가 굉장했다.");
+            printf("효과가 굉장했다(푸슝~).  ");
             return 1.5;
         }  
         else if(strcmp(enemyPokemon, "불") == 0){
-            printf("효과가 별로인 듯 하다.");
+            printf("효과가 별로인 듯 하다.(후ㅜㅜㅜ)  ");
             return 0.5;
         }
         else   
@@ -75,6 +77,7 @@ void travel(void){
         
         sleep(1+rand()%3);
 
+        int flagEnemyDown = 0, flagEnemyRun = 0; // 이것도 왜 여기 있을까? 이거는 6번에 쓰이는 flag로 시작은 무조건 0이다. "이거는 6번 중에 break을 하면 5번도 나가야한다.!!" -> 그래서 여기
         int wildPokemonNumber, sixRepeat;
         double attackPower;
         srand(time(NULL));
@@ -126,6 +129,21 @@ void travel(void){
                 //     //내 포켓몬 리스트의 모든 애들을 for문 돌려서(이때 배열크기는 정해져 있기 때문에 요소 개수를[현재 용량]이 필요한 거구나!) 모두 hp가 0이면 4번으로 이동
                 //     if()
                 // }
+
+                if(PL[wildPokemonNumber].hp < 0){
+                    printf("적 포켓몬을 쓰러뜨렸다!\n");
+                    flagEnemyDown = 1;
+                    break;
+                }
+                else if (PL[wildPokemonNumber].hp == 0)
+                {
+                    /* code */
+                    printf("적 포켓몬이 도망갔다....!\n");
+                    flagEnemyRun = 1;
+                    break;
+
+                }
+                
             }
             else if(sixRepeat == 2){
 
@@ -138,6 +156,14 @@ void travel(void){
                break;
             }
             // 내 포켓몬이 쓰러지거나, 포켓몬을 잡았거나, 0을 누르거나 하면 break를 해서 더 이상 6.이 안 나오도록 하자
+        }
+        if(flagEnemyDown){
+            flagEnemyDown = 0;
+            break;
+        }
+        if(flagEnemyRun){
+            flagEnemyRun = 0;
+            break;
         }
     }
 }
