@@ -58,6 +58,7 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
     }
 }
 
+// void()
 
 // 1번을 누르면 여행을 떠나는 함수
 void travel(void){
@@ -78,7 +79,7 @@ void travel(void){
         sleep(1+rand()%3);
 
         int flagEnemyDown = 0, flagEnemyRun = 0; // 이것도 왜 여기 있을까? 이거는 6번에 쓰이는 flag로 시작은 무조건 0이다. "이거는 6번 중에 break을 하면 5번도 나가야한다.!!" -> 그래서 여기
-        int wildPokemonNumber, sixRepeat;
+        int wildPokemonNumber, sixRepeat, wildPokemonWholeHp;
         double attackPower;
         srand(time(NULL));
 
@@ -86,6 +87,7 @@ void travel(void){
         printf("\t야생의 포켓몬이 나타났다!\n");
 
         wildPokemonNumber = rand() % 13;
+        wildPokemonWholeHp = PL[wildPokemonNumber].hp;
         printf("이름은 : %s\n속성은 : %s\n체력은 : %d\n공격력은 : %d\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].property, \
         PL[wildPokemonNumber].hp, PL[wildPokemonNumber].power);
 
@@ -146,7 +148,39 @@ void travel(void){
                 
             }
             else if(sixRepeat == 2){
-                //
+                //도망치기
+                int randNum = rand() % 100 + 1;
+                int percentage = (int)(PL[wildPokemonNumber].hp/wildPokemonNumber) * 100;
+                if(percentage == 100){
+                    if(randNum <= 10)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                else if (percentage >= 50 && percentage < 100)
+                {
+                    /* code */
+                    if(randNum <= 40)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                else if (percentage >= 25 && percentage < 50)
+                {
+                    /* code */
+                    if(randNum <= 70)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                else{
+                    if(randNum <= 90)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                
+                    
             }
             else if(sixRepeat == 3){
 
