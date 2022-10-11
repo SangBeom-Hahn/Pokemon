@@ -6,6 +6,8 @@
 # include<unistd.h> //sleep 함수 명시적으로 선언
 # include "Pokemon.h"
 
+/*이 플젝에서 제일 포인트는 현재 싸우는 포켓몬 변수를 만들고 리스트에서 하나씩 꺼내서 대입하는 것!!!*/
+
 PokemonList PL[13]; //파일의 길이를 알면 좋을 텐데
 MyPokemon myPokemon[6]; //같은 이유로 밖으로 뺌
 
@@ -13,11 +15,11 @@ MyPokemon myPokemon[6]; //같은 이유로 밖으로 뺌
 double fight(char fightingPokemon[], char enemyPokemon[]){
     if(strcmp(fightingPokemon, "불") == 0) {
         if(strcmp(enemyPokemon, "풀") == 0){
-            printf("효과가 굉장했다.");
+            printf("효과가 굉장했다(푸슝~)  ");
             return 1.5;
         }
         else if(strcmp(enemyPokemon, "물") == 0){
-            printf("효과가 별로인 듯 하다.");
+            printf("효과가 별로인 듯 하다.(후ㅜㅜㅜ)  ");
             return 0.5;
         }
         else   
@@ -29,11 +31,11 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
     }
     else if( strcmp(fightingPokemon, "물") == 0){
         if(strcmp(enemyPokemon, "불") == 0){
-            printf("효과가 굉장했다.");
+            printf("효과가 굉장했다(푸슝~).  ");
             return 1.5;
         } 
         else if(strcmp(enemyPokemon, "풀") == 0){
-            printf("효과가 별로인 듯 하다.");
+            printf("효과가 별로인 듯 하다.(후ㅜㅜㅜ)  ");
             return 0.5;
         }
         else   
@@ -44,17 +46,18 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
     }
     else{
         if(strcmp(enemyPokemon, "물") == 0){
-            printf("효과가 굉장했다.");
+            printf("효과가 굉장했다(푸슝~).  ");
             return 1.5;
         }  
         else if(strcmp(enemyPokemon, "불") == 0){
-            printf("효과가 별로인 듯 하다.");
+            printf("효과가 별로인 듯 하다.(후ㅜㅜㅜ)  ");
             return 0.5;
         }
         else   
             return 1;
     }
 }
+
 
 
 // 1번을 누르면 여행을 떠나는 함수
@@ -75,7 +78,8 @@ void travel(void){
         
         sleep(1+rand()%3);
 
-        int wildPokemonNumber, sixRepeat;
+        int flagEnemyDown = 0, flagEnemyRun = 0; // 이것도 왜 여기 있을까? 이거는 6번에 쓰이는 flag로 시작은 무조건 0이다. "이거는 6번 중에 break을 하면 5번도 나가야한다.!!" -> 그래서 여기
+        int wildPokemonNumber, sixRepeat, wildPokemonWholeHp;
         double attackPower;
         srand(time(NULL));
 
@@ -83,6 +87,7 @@ void travel(void){
         printf("\t야생의 포켓몬이 나타났다!\n");
 
         wildPokemonNumber = rand() % 13;
+        wildPokemonWholeHp = PL[wildPokemonNumber].hp;
         printf("이름은 : %s\n속성은 : %s\n체력은 : %d\n공격력은 : %d\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].property, \
         PL[wildPokemonNumber].hp, PL[wildPokemonNumber].power);
 
@@ -126,11 +131,58 @@ void travel(void){
                 //     //내 포켓몬 리스트의 모든 애들을 for문 돌려서(이때 배열크기는 정해져 있기 때문에 요소 개수를[현재 용량]이 필요한 거구나!) 모두 hp가 0이면 4번으로 이동
                 //     if()
                 // }
+
+                if(PL[wildPokemonNumber].hp < 0){
+                    printf("적 포켓몬을 쓰러뜨렸다!\n");
+                    flagEnemyDown = 1;
+                    break;
+                }
+                else if (PL[wildPokemonNumber].hp == 0)
+                {
+                    /* code */
+                    printf("적 포켓몬이 도망갔다....!\n");
+                    flagEnemyRun = 1;
+                    break;
+
+                }
+                
             }
             else if(sixRepeat == 2){
-
+                //도망치기
+                int randNum = rand() % 100 + 1;
+                int percentage = (int)(PL[wildPokemonNumber].hp/wildPokemonNumber) * 100;
+                if(percentage == 100){
+                    if(randNum <= 10)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                else if (percentage >= 50 && percentage < 100)
+                {
+                    /* code */
+                    if(randNum <= 40)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                else if (percentage >= 25 && percentage < 50)
+                {
+                    /* code */
+                    if(randNum <= 70)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }
+                else{
+                    if(randNum <= 90)
+                        printf("도망 성공!(룰루 랄라)\n");
+                    else
+                        printf("도망 실패 ㅜㅠㅜㅠ\n");
+                }                    
             }
             else if(sixRepeat == 3){
+                // 6번을 반복하다가 3을 누르면 가방 열기
+
 
             }
             // 0을 누르면 5번으로 이동
@@ -138,6 +190,14 @@ void travel(void){
                break;
             }
             // 내 포켓몬이 쓰러지거나, 포켓몬을 잡았거나, 0을 누르거나 하면 break를 해서 더 이상 6.이 안 나오도록 하자
+        }
+        if(flagEnemyDown){
+            flagEnemyDown = 0;
+            break;
+        }
+        if(flagEnemyRun){
+            flagEnemyRun = 0;
+            break;
         }
     }
 }
@@ -154,6 +214,7 @@ void main(void){
     int travelQA;
     char myPokemonNickName[20];
     char enter;
+    int money = 10000;
 
     if(fp == NULL){
         printf("파일이 없습니다.");
@@ -219,21 +280,80 @@ void main(void){
 
     while(1){
         //4번 반복
-        printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)\n");
+        printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)");
         scanf("%d", &travelQA);
         // 입력이 안되는 문제는 별명에 숫자를 넣으면 해결됨,,,,,ㅋz 하 입력 형식지정자 %d로 해놨음 역시 모든건 내 잘못 컴퓨터 잘못 없다!!
+
+
+        // 이것들은 처음에는 0인데 살 것을 선택하는 반복문이 실행될 때마다 다시 0이 되면 안되기 때문에 밖에 선언해야한다.
+        // 근데 또 4를 반복할 때는 0개부터 시작해야해서 여기!!!
+        int ballCnt, portionCnt; 
 
         if(travelQA == 1){
             travel();
         }
-        else if(travelQA == 2){
-            
-        }
-        else{
-            
-        }
-    }    
-    
+        else if(travelQA == 3){
+            // whatBuy는 밖에 쓰는 안에 쓰는 상관없는 거네 -> flag나 수량은 기록이 남는 게 중요하지만 단순 입력은 상관없지
+            int whatBuy;
+            char yesOrNo;
+            while(1){
+                printf("\t\t\t현재 소유 금액 : %d\n", money);
+                printf("\t 1. 몬스터볼\t1000\n");
+                printf("\t 2. 회복물약\t2500\n");
 
+                puts("어떤 아이템을 사시겠습니까? : ");
+                scanf("%d", &whatBuy);
+
+                printf("수량을 고르세요!!"); //↓ 밑에 따로따로 쓰기 싫어서 한 줄이라도 공유할 수 있는 거 올렸다.
+                if(whatBuy == 0){
+                    break;
+                }
+                // 고민 : 나는 if문 안에 따로따로 쓰기 싫은데 어쩔 수 없나,,,
+                // 아니 살 때 2500원에 개수 곱하는 거랑 1000원에 개수 곱하는게 달라서 이래ㅏ,,,
+                else if(whatBuy == 1){
+                    scanf("%d", &ballCnt);
+                    printf("구매 하시겠습니까? (y/n)");
+                    // yesOrNo = getchar(); // scanf와 getchar의 차이가 조금이라도 있나 보려고 =  없다.
+                    getchar();
+                    scanf("%c", &yesOrNo);
+                    
+                    if(yesOrNo == 'y'){
+                        if(1000 * ballCnt < money){
+                            puts("성공적으로 몬스터 볼을 구매하였다");
+                            money -= (1000*ballCnt);
+                        }
+                        else{
+                            puts("돈이 부족하여 살 수 없습니다.");    
+                        }
+                    }
+                    else{
+                        puts("n을 입력하셨습니다.");
+                    }
+                }
+                else{
+                    scanf("%d", &portionCnt);
+                    puts("구매 하시겠습니까? (y/n)");
+                    getchar();
+                    yesOrNo = getchar(); // scanf와 getchar의 차이가 조금이라도 있나 보려고
+                    
+                    if(yesOrNo == 'y'){
+                        if(2500 * portionCnt < money){
+                            puts("성공적으로 회복물약을 구매하였다");
+                            money -= (2500*portionCnt);
+                        }
+                        else{
+                            puts("돈이 부족하여 살 수 없습니다.");    
+                        }
+                    }
+                    else{
+                        puts("n을 입력하셨습니다.");
+                    }
+                }
+            }    
+        }
+        // else{
+
+        // }
+    }
     fclose(fp);
 }
