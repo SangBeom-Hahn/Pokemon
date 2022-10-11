@@ -58,7 +58,7 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
     }
 }
 
-// void()
+
 
 // 1번을 누르면 여행을 떠나는 함수
 void travel(void){
@@ -214,6 +214,7 @@ void main(void){
     int travelQA;
     char myPokemonNickName[20];
     char enter;
+    int money = 10000;
 
     if(fp == NULL){
         printf("파일이 없습니다.");
@@ -279,21 +280,80 @@ void main(void){
 
     while(1){
         //4번 반복
-        printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)\n");
+        printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)");
         scanf("%d", &travelQA);
         // 입력이 안되는 문제는 별명에 숫자를 넣으면 해결됨,,,,,ㅋz 하 입력 형식지정자 %d로 해놨음 역시 모든건 내 잘못 컴퓨터 잘못 없다!!
+
+
+        // 이것들은 처음에는 0인데 살 것을 선택하는 반복문이 실행될 때마다 다시 0이 되면 안되기 때문에 밖에 선언해야한다.
+        // 근데 또 4를 반복할 때는 0개부터 시작해야해서 여기!!!
+        int ballCnt, portionCnt; 
 
         if(travelQA == 1){
             travel();
         }
-        else if(travelQA == 2){
-            
-        }
-        else{
-            
-        }
-    }    
-    
+        else if(travelQA == 3){
+            // whatBuy는 밖에 쓰는 안에 쓰는 상관없는 거네 -> flag나 수량은 기록이 남는 게 중요하지만 단순 입력은 상관없지
+            int whatBuy;
+            char yesOrNo;
+            while(1){
+                printf("\t\t\t현재 소유 금액 : %d\n", money);
+                printf("\t 1. 몬스터볼\t1000\n");
+                printf("\t 2. 회복물약\t2500\n");
 
+                puts("어떤 아이템을 사시겠습니까? : ");
+                scanf("%d", &whatBuy);
+
+                printf("수량을 고르세요!!"); //↓ 밑에 따로따로 쓰기 싫어서 한 줄이라도 공유할 수 있는 거 올렸다.
+                if(whatBuy == 0){
+                    break;
+                }
+                // 고민 : 나는 if문 안에 따로따로 쓰기 싫은데 어쩔 수 없나,,,
+                // 아니 살 때 2500원에 개수 곱하는 거랑 1000원에 개수 곱하는게 달라서 이래ㅏ,,,
+                else if(whatBuy == 1){
+                    scanf("%d", &ballCnt);
+                    printf("구매 하시겠습니까? (y/n)");
+                    // yesOrNo = getchar(); // scanf와 getchar의 차이가 조금이라도 있나 보려고 =  없다.
+                    getchar();
+                    scanf("%c", &yesOrNo);
+                    
+                    if(yesOrNo == 'y'){
+                        if(1000 * ballCnt < money){
+                            puts("성공적으로 몬스터 볼을 구매하였다");
+                            money -= (1000*ballCnt);
+                        }
+                        else{
+                            puts("돈이 부족하여 살 수 없습니다.");    
+                        }
+                    }
+                    else{
+                        puts("n을 입력하셨습니다.");
+                    }
+                }
+                else{
+                    scanf("%d", &portionCnt);
+                    puts("구매 하시겠습니까? (y/n)");
+                    getchar();
+                    yesOrNo = getchar(); // scanf와 getchar의 차이가 조금이라도 있나 보려고
+                    
+                    if(yesOrNo == 'y'){
+                        if(2500 * portionCnt < money){
+                            puts("성공적으로 회복물약을 구매하였다");
+                            money -= (2500*portionCnt);
+                        }
+                        else{
+                            puts("돈이 부족하여 살 수 없습니다.");    
+                        }
+                    }
+                    else{
+                        puts("n을 입력하셨습니다.");
+                    }
+                }
+            }    
+        }
+        // else{
+
+        // }
+    }
     fclose(fp);
 }
