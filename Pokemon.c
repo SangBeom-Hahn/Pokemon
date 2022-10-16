@@ -11,6 +11,13 @@
 PokemonList PL[13]; //파일의 길이를 알면 좋을 텐데
 MyPokemon myPokemon[6]; //같은 이유로 밖으로 뺌
 
+//처음에는 위에 두개였는데 점점 쌓인다...
+int currentMyPokemonCnt = 2;
+//내 포켓몬 리스트 중에서 처음으로 싸우는 내 포켓몬은 무조건 0번 인덱스임 + 이런걸 프로토타입으로 해놓으면 나중에도 기억나겠지?(다시 보는 시점에 이거 쓴 기억 1도 없음 ㅋㅋ)
+int fightMyPokomomNum = 0; //이거 아예 밖으로 빼야할 수 도?? 1번을 눌렀을 때 내포켓몬 말고 리스트의 다른 포켓몬이 나올 수 도 있다/
+int selectNextMyPokemon;
+int ballCnt, portionCnt;
+
 // 여행을 떠나다가 공격을 하는 함수
 double fight(char fightingPokemon[], char enemyPokemon[]){
     if(strcmp(fightingPokemon, "불") == 0) {
@@ -68,8 +75,7 @@ void travel(void){
     // ★★★ 엄청 중요한게 이 변수의 위치가 여기인 이유가 6번이 반복될 건데 처음 시작만 0이고 그 후에는 반복이 진행되면서 바뀔 것이기 때문에 이러한 경우에는 
     // while문 밖에 쓰면 되겠다!!
 
-    //내 포켓몬 리스트 중에서 처음으로 싸우는 내 포켓몬은 무조건 0번 인덱스임 
-    int fightMyPokomom = 0; 
+    //원래 fightmypokemon 여기였음 ㅋㅋ
 
     while(1){
         //★5번 반복 부분
@@ -102,36 +108,56 @@ void travel(void){
 
             if(sixRepeat == 1){
                 //여기에 속성 강 vs 약 넣자 -> 이런 변화와 할 일 예정 등을 형상 관리를 해야한다 이거야
-                strcpy(fightingPokemon, myPokemon[fightMyPokomom].property);
+                strcpy(fightingPokemon, myPokemon[fightMyPokomomNum].property);
                 strcpy(enemyPokemon, PL[wildPokemonNumber].property);
-                printf("내 %s가 공격한다! \n", myPokemon[fightMyPokomom].name);
+                printf("내 %s가 공격한다! \n", myPokemon[fightMyPokomomNum].name);
 
                 // 속성 차이 함수로 만들자
                 attackPower = fight(fightingPokemon, enemyPokemon);
 
-                PL[wildPokemonNumber].hp -= myPokemon[fightMyPokomom].power*attackPower;
-                printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomom].name, myPokemon[fightMyPokomom].hp);
+                PL[wildPokemonNumber].hp -= myPokemon[fightMyPokomomNum].power*attackPower;
+                printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomomNum].name, myPokemon[fightMyPokomomNum].hp);
                 printf("%s의 남은 체력 : %d\n\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].hp);
                 
                 sleep(2);
             
                 strcpy(fightingPokemon, PL[wildPokemonNumber].property);
-                strcpy(enemyPokemon, myPokemon[fightMyPokomom].property);
+                strcpy(enemyPokemon, myPokemon[fightMyPokomomNum].property);
                 printf("적 %s가 공격한다! \n", PL[wildPokemonNumber].name);
 
                 // 속성 차이 함수로 만들자
                 attackPower = fight(fightingPokemon, enemyPokemon);
 
-                myPokemon[fightMyPokomom].hp -= PL[wildPokemonNumber].power*attackPower;
-                printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomom].name, myPokemon[fightMyPokomom].hp);
+                myPokemon[fightMyPokomomNum].hp -= PL[wildPokemonNumber].power*attackPower;
+                printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomomNum].name, myPokemon[fightMyPokomomNum].hp);
                 printf("%s의 남은 체력 : %d\n\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].hp);
 
+/*======================================================================================================================================================================*/
+
+
+
                 // 내 포켓몬이 쓰러지면 포켓몬 잡고나서 생각하자
-                // if(myPokemon[fightMyPokomom].hp < 0){
+                // if(myPokemon[fightMyPokomomNum].hp < 0){
                 //     //내 포켓몬 리스트의 모든 애들을 for문 돌려서(이때 배열크기는 정해져 있기 때문에 요소 개수를[현재 용량]이 필요한 거구나!) 모두 hp가 0이면 4번으로 이동
                 //     if()
+
+                    // for(int i=0; i<currentMyPokemonCnt; i++){
+                    //     printf("%d.   %s   %s   %d\n", i+1, myPokemon[i].name, myPokemon[i].property, myPokemon[i].hp); //현재 내 포켓몬의 개수를 나타내는 변수도 마련해 놓으면 배열에 쓰기 좋겠다.
+
+                    
+                    // }
+                    // printf("어느 포켓몬을 내보내시겠습니까? : ");
+                    // scanf("%d", &selectNextMyPokemon); //구조체 배열에서 진짜로 체력을 깎으면 대입 안해도 되나?/
+                    // fightMyPokomomNum = selectNextMyPokemon-1;
+                
                 // }
 
+<<<<<<< HEAD
+=======
+
+/*======================================================================================================================================================================*/
+
+>>>>>>> MIPV-17
                 if(PL[wildPokemonNumber].hp < 0){
                     printf("적 포켓몬을 쓰러뜨렸다!\n");
                     flagEnemyDown = 1;
@@ -178,11 +204,72 @@ void travel(void){
                         printf("도망 성공!(룰루 랄라)\n");
                     else
                         printf("도망 실패 ㅜㅠㅜㅠ\n");
+<<<<<<< HEAD
                 }
                 
                     
+=======
+                }                    
+>>>>>>> MIPV-17
             }
-            else if(sixRepeat == 3){
+            else if(sixRepeat == 3){ //상점은 if안에 반복문이여야만 하는데 얜 한번 시도하고 if문 밖으로 나가서 아니다!!
+                // 6번을 반복하다가 3을 누르면 가방 열기
+                int choose;
+
+                printf("1. 몬스터 볼    x%d\n",ballCnt);
+                printf("2. 회복 물약    x%d\n",portionCnt);
+
+                printf("어떤 아이템을 사용하시겠습니까? : ");
+                scanf("%d", &choose);
+                if(choose == 1){
+                    // 몬스터 볼을 선택한 경우
+                    if(PL[wildPokemonNumber].hp >= wildPokemonWholeHp * 0.5){
+                        //이 부분을 위해서 가져왔다 만약 된다면 나중에 함수화하자 하지만 이 부분을 위에서 가져 온 것도 다 fight를 함수화 해두어서 가능한 일이다!!/
+
+                        printf("체력을 더 깎아주세요......\n");
+                        strcpy(fightingPokemon, PL[wildPokemonNumber].property);
+                        strcpy(enemyPokemon, myPokemon[fightMyPokomomNum].property);
+                        printf("적 %s가 공격한다! \n", PL[wildPokemonNumber].name);
+
+                        // 속성 차이 함수로 만들자
+                        attackPower = fight(fightingPokemon, enemyPokemon);
+
+                        myPokemon[fightMyPokomomNum].hp -= PL[wildPokemonNumber].power*attackPower;
+                        printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomomNum].name, myPokemon[fightMyPokomomNum].hp);
+                        printf("%s의 남은 체력 : %d\n\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].hp);
+                    }
+                    else{
+                        // 퍼센트가 계속 바뀔 거니까 여기!
+                        int percent = (int)(PL[wildPokemonNumber].hp/wildPokemonWholeHp)*100;
+                        int randNum = rand() % 100 + 1;
+
+                        if( percent >= 30 && percent <=50 ){
+                            if(randNum < 30){
+
+                            }
+                        }
+                        else if(percent >= 10 && percent <= 30){
+                            if(randNum < 60){
+
+                            }
+                        }
+                        else{
+                            if(randNum < 90){
+
+                            }
+                        }
+                    }
+
+                    ballCnt--;
+                }
+                else{
+
+                }
+
+
+
+
+
 
             }
             // 0을 누르면 5번으로 이동
@@ -287,7 +374,11 @@ void main(void){
 
         // 이것들은 처음에는 0인데 살 것을 선택하는 반복문이 실행될 때마다 다시 0이 되면 안되기 때문에 밖에 선언해야한다.
         // 근데 또 4를 반복할 때는 0개부터 시작해야해서 여기!!!
+<<<<<<< HEAD
         int ballCnt, portionCnt; 
+=======
+        // int ballCnt, portionCnt; 근데 싸울 때 써야하네... 이렇게 밖으로 가는게 맞아??
+>>>>>>> MIPV-17
 
         if(travelQA == 1){
             travel();
