@@ -80,9 +80,9 @@ void travel(void){
 
     while(1){
         //★5번 반복 부분
-        if(flagFinish)
+        if(flagFinish){
             break;
-
+        }
 
         printf("================================\n");
         printf("\t길을 걷는 중... ... ...\n");
@@ -92,7 +92,7 @@ void travel(void){
         int flagEnemyDown = 0, flagEnemyRun = 0; // 이것도 왜 여기 있을까? 이거는 6번에 쓰이는 flag로 시작은 무조건 0이다. "이거는 6번 중에 break을 하면 5번도 나가야한다.!!" -> 그래서 여기
         int wildPokemonNumber, sixRepeat, wildPokemonWholeHp;
         double attackPower;
-        int flagCatch = 0, flageRun = 0;
+        int flagCatch = 0, flagRun = 0;
         char catchPokemonName[10];
         srand(time(NULL));
 
@@ -107,6 +107,7 @@ void travel(void){
 
         while(1){
             if(flagFinish){
+                PL[wildPokemonNumber].hp = wildPokemonWholeHp; //원상복구
                 break;
             }
 
@@ -118,6 +119,7 @@ void travel(void){
 
 
             if(sixRepeat == 1){
+                printf("%d", wildPokemonWholeHp);
                 int i=0; // 내 포켓몬들 체력 전부 0인지 보기 위한 i
 
                 //여기에 속성 강 vs 약 넣자 -> 이런 변화와 할 일 예정 등을 형상 관리를 해야한다 이거야
@@ -160,8 +162,8 @@ void travel(void){
                     
                     if(i == currentMyPokemonCnt){
                         printf("눈 앞이 캄캄해졌다....\n\n보유하고 계신 모든 포켓몬이 체력을 회복하였습니다.\n");
-                        for(int j=0; i<currentMyPokemonCnt; i++){
-                            myPokemon[j].hp = 1000; //새 삶을 살기 위해 쓰러지면 1000으로 가자~~
+                        for(int j=0; j<currentMyPokemonCnt; j++){
+                            myPokemon[j].hp = 1000; //새 삶을 살기 위해 쓰러지면 모두 다 체력을 1000으로 가자~~
                         }
                     
                         flagFinish = 1;
@@ -207,7 +209,7 @@ void travel(void){
                     if(randNum <= 10){
                         //여기도 flag로 처리 가능하겠다! 반복되는 곳은 다 flag로 가능??
                         printf("도망 성공!(룰루 랄라)\n");
-                        flageRun = 1;
+                        flagRun = 1;
                     }
                     else
                         printf("도망 실패 ㅜㅠㅜㅠ\n");
@@ -217,7 +219,7 @@ void travel(void){
                     /* code */
                     if(randNum <= 40){
                         printf("도망 성공!(룰루 랄라)\n");
-                        flageRun = 1;
+                        flagRun = 1;
                     }
                     else
                         printf("도망 실패 ㅜㅠㅜㅠ\n");
@@ -227,7 +229,7 @@ void travel(void){
                     /* code */
                     if(randNum <= 70){
                         printf("도망 성공!(룰루 랄라)\n");
-                        flageRun = 1;
+                        flagRun = 1;
                     }
                     else
                         printf("도망 실패 ㅜㅠㅜㅠ\n");
@@ -235,7 +237,7 @@ void travel(void){
                 else{
                     if(randNum <= 90){
                         printf("도망 성공!(룰루 랄라)\n");
-                        flageRun = 1;
+                        flagRun = 1;
                     }
                     else
                         printf("도망 실패 ㅜㅠㅜㅠ\n");
@@ -344,12 +346,18 @@ void travel(void){
             else{
                break;
             }
+            if(flagRun){
+            // 내가 도망가면 
+            flagRun = 0;
+            break;
+        }
         }
         if(flagEnemyDown){
             flagEnemyDown = 0;
             break;
         }
         if(flagEnemyRun){
+            PL[wildPokemonNumber].hp = wildPokemonWholeHp; //적이 도망가면 적 체력 원상복구
             flagEnemyRun = 0;
             break;
         }
@@ -380,7 +388,7 @@ void main(void){
         if(feof(fp))
             break;
 
-        fscanf(fp, "%s %s %d %d", &PL[i].name, &PL[i].property, &PL[i].power, &PL[i].hp);
+        fscanf(fp, "%s %s %d %d %d", &PL[i].name, &PL[i].property, &PL[i].power, &PL[i].hp, &PL[i].wholeHp);
         i++;
     }
     
@@ -435,6 +443,7 @@ void main(void){
     while(1){
         //4번 반복
         printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)");
+        printf("%d", currentMyPokemonCnt);
         scanf("%d", &travelQA);
         // 입력이 안되는 문제는 별명에 숫자를 넣으면 해결됨,,,,,ㅋz 하 입력 형식지정자 %d로 해놨음 역시 모든건 내 잘못 컴퓨터 잘못 없다!!
 
