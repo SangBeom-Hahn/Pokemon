@@ -334,6 +334,21 @@ void travel(void){
                 }
                 else{
                     //물약을 선택한 경우
+                    myPokemon[fightMyPokomomNum].hp += 300;
+                    portionCnt--;
+                    printf("%s의 체력디 (300) 회복되었습니다.\n", myPokemon[fightMyPokomomNum].name);
+
+                    // 이것 역시 가져다 씀 함수화 필수!!!
+                    strcpy(fightingPokemon, PL[wildPokemonNumber].property);
+                    strcpy(enemyPokemon, myPokemon[fightMyPokomomNum].property);
+                    printf("적 %s가 공격한다! \n", PL[wildPokemonNumber].name);
+
+                    // 속성 차이 함수로 만들자
+                    attackPower = fight(fightingPokemon, enemyPokemon);
+
+                    myPokemon[fightMyPokomomNum].hp -= PL[wildPokemonNumber].power*attackPower;
+                    printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomomNum].name, myPokemon[fightMyPokomomNum].hp);
+                    printf("%s의 남은 체력 : %d\n\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].hp);
                 }
 
 
