@@ -119,7 +119,6 @@ void travel(void){
 
 
             if(sixRepeat == 1){
-                printf("%d", wildPokemonWholeHp);
                 int i=0; // 내 포켓몬들 체력 전부 0인지 보기 위한 i
 
                 //여기에 속성 강 vs 약 넣자 -> 이런 변화와 할 일 예정 등을 형상 관리를 해야한다 이거야
@@ -264,7 +263,7 @@ void travel(void){
                     if(PL[wildPokemonNumber].hp >= wildPokemonWholeHp * 0.5){
                         //이 부분을 위해서 가져왔다 만약 된다면 나중에 함수화하자 하지만 이 부분을 위에서 가져 온 것도 다 fight를 함수화 해두어서 가능한 일이다!!/
 
-                        printf("체력을 더 깎아주세요......\n");
+                        printf("체력을 더 깎아주세요......\n\n");
                         strcpy(fightingPokemon, PL[wildPokemonNumber].property);
                         strcpy(enemyPokemon, myPokemon[fightMyPokomomNum].property);
                         printf("적 %s가 공격한다! \n", PL[wildPokemonNumber].name);
@@ -275,6 +274,7 @@ void travel(void){
                         myPokemon[fightMyPokomomNum].hp -= PL[wildPokemonNumber].power*attackPower;
                         printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomomNum].name, myPokemon[fightMyPokomomNum].hp);
                         printf("%s의 남은 체력 : %d\n\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].hp);
+                        continue;
                     }
                     else{
                         //잡으면 여행을 계속하기 위해 5번으로 가고 빠져나오면 계속 싸워야하니 6번으로 가자
@@ -348,11 +348,13 @@ void travel(void){
             }
             if(flagRun){
             // 내가 도망가면 
+            PL[wildPokemonNumber].hp = wildPokemonWholeHp; //내가 도망가면 적 체력 원상복구
             flagRun = 0;
             break;
         }
         }
         if(flagEnemyDown){
+            PL[wildPokemonNumber].hp = wildPokemonWholeHp; //적이 쓰러지면 적 체력 원상복구
             flagEnemyDown = 0;
             break;
         }
@@ -443,7 +445,6 @@ void main(void){
     while(1){
         //4번 반복
         printf("===========================\n\t\t여행을 떠나시겠습니까?\n\t1. 네\t2. 아니요(저장여부선택)\t3. 상점가기(몬스터볼과 회복 물약 사기)");
-        printf("%d", currentMyPokemonCnt);
         scanf("%d", &travelQA);
         // 입력이 안되는 문제는 별명에 숫자를 넣으면 해결됨,,,,,ㅋz 하 입력 형식지정자 %d로 해놨음 역시 모든건 내 잘못 컴퓨터 잘못 없다!!
 
