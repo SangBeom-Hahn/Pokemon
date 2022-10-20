@@ -243,6 +243,13 @@ void travel(void){
             }
             else if(sixRepeat == 3){ //상점은 if안에 반복문이여야만 하는데 얜 한번 시도하고 if문 밖으로 나가서 아니다!!
                 // 6번을 반복하다가 3을 누르면 가방 열기
+                if(ballCnt == 0 && portionCnt == 0){
+                    // 아무것도 없는 경우에는 다른 선택을 유도
+                    printf("가방이 비어있습니다.\n");
+                    continue;
+                }
+
+
                 int choose;
 
                 printf("1. 몬스터 볼    x%d\n",ballCnt);
@@ -451,14 +458,15 @@ void main(void){
 
                 puts("어떤 아이템을 사시겠습니까? : ");
                 scanf("%d", &whatBuy);
-
-                printf("수량을 고르세요!!"); //↓ 밑에 따로따로 쓰기 싫어서 한 줄이라도 공유할 수 있는 거 올렸다.
-                if(whatBuy == 0){
+                if(whatBuy == 0){ // 이걸 여기에 써야 0을 눌렀을 때 수량을 고르세요라고 안나오는데 그러면 if-else문이 깨진다.
                     break;
                 }
+
+                printf("수량을 고르세요!!"); //↓ 밑에 따로따로 쓰기 싫어서 한 줄이라도 공유할 수 있는 거 올렸다. # 이런것이 형상관리지
+                
                 // 고민 : 나는 if문 안에 따로따로 쓰기 싫은데 어쩔 수 없나,,,
                 // 아니 살 때 2500원에 개수 곱하는 거랑 1000원에 개수 곱하는게 달라서 이래ㅏ,,,
-                else if(whatBuy == 1){
+                if(whatBuy == 1){ // else if(whatBuy == 1){ 원래는 이거였는데 0을 누르는 것도 whatBuy로 해서 whatBuy를 통한 if문을 두개를 했는데 되네??
                     scanf("%d", &ballCnt);
                     printf("구매 하시겠습니까? (y/n)");
                     // yesOrNo = getchar(); // scanf와 getchar의 차이가 조금이라도 있나 보려고 =  없다.
