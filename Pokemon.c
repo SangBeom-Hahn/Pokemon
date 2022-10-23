@@ -18,6 +18,9 @@ int fightMyPokomomNum = 0; //이거 아예 밖으로 빼야할 수 도?? 1번을 눌렀을 때 내�
 int selectNextMyPokemon;
 int ballCnt, portionCnt;
 
+//지금까지 flag는 전역에는 없었는데 이건 main이랑 travel을 거치는 flag라서 전역!
+int flagMoreGame;
+
 // 여행을 떠나다가 공격을 하는 함수
 double fight(char fightingPokemon[], char enemyPokemon[]){
     if(strcmp(fightingPokemon, "불") == 0) {
@@ -71,7 +74,7 @@ double fight(char fightingPokemon[], char enemyPokemon[]){
 void travel(void){
     int turn = 0; // 짝수면 내가 공격하는 거고 홀수면 상대가 공격한다.
     char fightingPokemon[10], enemyPokemon[10];
-    int flagFinish=0;
+    int flagFinish=0, flagMyPokemonCnt = 0;
 
     // ★★★ 엄청 중요한게 이 변수의 위치가 여기인 이유가 6번이 반복될 건데 처음 시작만 0이고 그 후에는 반복이 진행되면서 바뀔 것이기 때문에 이러한 경우에는 
     // while문 밖에 쓰면 되겠다!!
@@ -81,6 +84,9 @@ void travel(void){
     while(1){
         //★5번 반복 부분
         if(flagFinish){
+            break;
+        }
+        if(flagMyPokemonCnt){
             break;
         }
 
@@ -314,6 +320,26 @@ void travel(void){
                         //인덱스 정보를 활용하기 위해 처음에 Cnt가 1이니 대입 먼저하고 ++해야 대입도 되고 Cnt도 2마리로 된다.
                         currentMyPokemonCnt++;
                         PL[wildPokemonNumber].hp = wildPokemonWholeHp;
+
+                        if(currentMyPokemonCnt == 6){
+                            //귀찮아서 그냥 여기 썼다 개선때 다시 보자
+                            char moreGame;
+                            do{
+                                printf("6마리 수집 완료!! 넌 이제 내꺼야!!!! 여행을 더 떠나볼까(Y/N)? : ");
+                                scanf("%c", &moreGame);
+                            }while(moreGame != 'Y' || moreGame != 'N');
+
+                            if(moreGame == 'Y'){
+                                currentMyPokemonCnt = 1;
+                                flagMoreGame = 1;
+                                flagMyPokemonCnt = 1;
+                                break;
+                            }
+                            else{
+                                flagMyPokemonCnt = 1;
+                                break;
+                            }
+                        }
                         break;
                     }
                     else{
@@ -350,12 +376,6 @@ void travel(void){
                     printf("%s의 남은 체력 : %d\n", myPokemon[fightMyPokomomNum].name, myPokemon[fightMyPokomomNum].hp);
                     printf("%s의 남은 체력 : %d\n\n", PL[wildPokemonNumber].name, PL[wildPokemonNumber].hp);
                 }
-
-
-
-
-
-
             }
             // 0을 누르면 5번으로 이동
             else{
@@ -433,8 +453,8 @@ void main(void){
         if(myPokemonNum == 1){
             strcpy(myPokemon[0].name, "파이리");
             strcpy(myPokemon[0].property, "불");
-            myPokemon[0].hp = 500 + rand() % 501;
-            myPokemon[0].power = 100 + rand() % 51;
+            myPokemon[0].hp = 50000 + rand() % 501;
+            myPokemon[0].power = 150 + rand() % 51;
         }
         else if (myPokemonNum == 2)
         {
@@ -471,6 +491,8 @@ void main(void){
 
         if(travelQA == 1){
             travel();
+            if(flagMoreGame)
+                continue;
         }
         else if(travelQA == 3){
             // whatBuy는 밖에 쓰는 안에 쓰는 상관없는 거네 -> flag나 수량은 기록이 남는 게 중요하지만 단순 입력은 상관없지
