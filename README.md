@@ -12,17 +12,18 @@
 
 ## Features
 
+<!--
 ## [Issue]
 
 * [X] A
 * [ ] B
 * [ ] C
+-->
 
 <!--
 ## Prerequisites
-
 Before you begin, ensure you have met the following requirements:
-<!--- These are just example requirements. Add, duplicate or remove as required --->
+// These are just example requirements. Add, duplicate or remove as required
 * You have installed the latest version of `<coding_language/dependency/requirement_1>`
 * You have a `<Windows/Linux/Mac>` machine. State which OS is supported/which is not.
 * You have read `<guide/link/documentation_related_to_project>`.
