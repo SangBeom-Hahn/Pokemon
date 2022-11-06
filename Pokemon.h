@@ -6,7 +6,7 @@ typedef struct{
     char property[10]; //불
     int power; //12
     int hp; //500
-    int wholeHp; //500 변경 ㄴㄴ
+    int wholeHp; //500 변경
 }PokemonList;
 
 typedef struct 
