@@ -16,7 +16,7 @@
 
 // 볼이냐 물약이냐에 따라 달라지는 부분 1. cnt, 2 money
 // 와,, 이런 센스 price를 만들고 각각 인자를 다르게 주는 센스!!!
-void buy(int* cnt, int price, char item){
+void buy(int* cnt, int price, char item[]){
     char yesOrNo;
     printf("구매 하시겠습니까? (y/n)");
 

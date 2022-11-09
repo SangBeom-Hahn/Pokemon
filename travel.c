@@ -8,6 +8,7 @@
 void travel(void){
     int turn = 0; // 짝수면 내가 공격하는 거고 홀수면 상대가 공격한다.
     int flagFinish=0, flagMyPokemonCnt = 0;
+    fightMyPokomomNum = 0;
 
     /*
     ★★★ 엄청 중요한게 이 변수의 위치가 여기인 이유가 6번이 반복될 건데 처음 시작만 0이고 그 후에는 반복이 진행되면서 바뀔 것이기 때문에 이러한 경우에는 

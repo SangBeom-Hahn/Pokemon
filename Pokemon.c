@@ -20,6 +20,7 @@ void main(void){
     int travelQA;
     char myPokemonNickName[20];
     char enter;
+    money = 10000; // 헤더 파일의 변수는 초기화를 할 수 없다. 따라서 선언만하고 사용하는 곳에서 한 번만 초기화
 
     // 항상 실패하는 경우를 생각해야 한다.
     if(fp == NULL){
