@@ -2,11 +2,20 @@
 
 ## ✨ Demo
 
-
-<p align="center">
-  <img width="700" align="center" src="https://user-images.githubusercontent.com/9840435/60266022-72a82400-98e7-11e9-9958-f9004c2f97e1.gif" alt="demo"/>
+### start
+<p align ="center">
+  <img src = "https://user-images.githubusercontent.com/90328527/200817859-43f744a1-55f9-40b0-bf9c-0492bf0febbc.gif">
 </p>
 
+### run
+<p align ="center">
+  <img src = "https://user-images.githubusercontent.com/90328527/200817948-cac44620-3282-41a4-945f-e4dc51d526de.gif">
+</p>
+
+### catch
+<p align ="center">
+  <img src = "https://user-images.githubusercontent.com/90328527/200818048-231e8172-21c6-4a82-a0ce-01e944c6fea4.gif">
+</p>
 
 ## Project Structure
 ```
@@ -46,14 +55,14 @@
 * [ ] C
 -->
 
-
+<!--
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
 // These are just example requirements. Add, duplicate or remove as required
 * You have installed the latest version of `<coding_language/dependency/requirement_1>`
 * You have a `<Windows/Linux/Mac>` machine. State which OS is supported/which is not.
 * You have read `<guide/link/documentation_related_to_project>`.
-
+-->
 
 <!--
 ## Release History
@@ -72,6 +81,8 @@ Before you begin, ensure you have met the following requirements:
     * Work in progress
 -->
 
+
+<!--
 ## 🚀 Usage
 
 클론
@@ -79,7 +90,7 @@ Before you begin, ensure you have met the following requirements:
 ```bash
   git clone https://github.com/SangBoem-Hahn/Pokemon
 ```
-
+-->
 
 
 
@@ -91,5 +102,5 @@ Before you begin, ensure you have met the following requirements:
 👤 **SangBoem-Hahn**
 
 - Github: [@SangBoem-Hahn](https://github.com/SangBoem-Hahn)
-- Blog : 
+- Blog : [티스토리](https://hsb422.tistory.com/entry/%EB%AF%B8Pokemon-Project)
 ---
