@@ -4,7 +4,7 @@
 
 ### start
 <p align ="center">
-  <img src = "https://user-images.githubusercontent.com/90328527/200817859-43f744a1-55f9-40b0-bf9c-0492bf0febbc.gif">
+  <img src = "https://user-images.githubusercontent.com/90328527/200818048-231e8172-21c6-4a82-a0ce-01e944c6fea4.gif">
 </p>
 
 ### run
@@ -14,7 +14,7 @@
 
 ### catch
 <p align ="center">
-  <img src = "https://user-images.githubusercontent.com/90328527/200818048-231e8172-21c6-4a82-a0ce-01e944c6fea4.gif">
+  <img src = "https://user-images.githubusercontent.com/90328527/200817859-43f744a1-55f9-40b0-bf9c-0492bf0febbc.gif">
 </p>
 
 ## Project Structure
