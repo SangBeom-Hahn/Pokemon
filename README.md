@@ -1,6 +1,6 @@
 # Pokemon 프로젝트
 
-script 형식 포켓몬스터 게임 
+script 형식 포켓몬스터 게임 개발 프로젝트
 
 https://www.youtube.com/watch?v=Bm_cC40dx7c
 
