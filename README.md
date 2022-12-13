@@ -108,5 +108,5 @@ Before you begin, ensure you have met the following requirements:
 👤 **SangBoem-Hahn**
 
 - Github: [@SangBoem-Hahn](https://github.com/SangBoem-Hahn)
-- Blog : [티스토리](https://hsb422.tistory.com/entry/%EB%AF%B8Pokemon-Project)
+- Blog : [Tistory(pokemon)](https://hsb422.tistory.com/entry/%EB%AF%B8Pokemon-Project)
 ---
